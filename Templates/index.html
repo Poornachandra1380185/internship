@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+</head>
+<body>
+    <h1>Upload Files</h1>
+    
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <label for="file">Select File:</label>
+        <input type="file" id="file" name="file" accept=".pdf, .doc, .docx, .jpg, .jpeg, .png">
+        <button type="submit">Upload File</button>
+    </form>
+    
+    {% if uploaded_path %}
+    <h2>Uploaded File Path:</h2>
+    <p>{{ uploaded_path }}</p>
+    <h2>Uploaded File:</h2>
+    {% if uploaded_path.endswith('.jpg') or uploaded_path.endswith('.jpeg') or uploaded_path.endswith('.png') %}
+    <img src="{{ uploaded_path }}" alt="Uploaded Image" style="max-width: 100%;">
+    {% elif uploaded_path.endswith('.pdf') %}
+    <iframe src="{{ uploaded_path }}" width="100%" height="600px"></iframe>
+    {% endif %}
+    {% endif %}
+</body>
+</html>
